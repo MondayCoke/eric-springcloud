@@ -1,0 +1,2 @@
+org.springframework.cloud.bootstrap.BootstrapConfiguration=\
+  com.gupaoedu.malll.env.GpDefinieJsonPropertySourceLocator

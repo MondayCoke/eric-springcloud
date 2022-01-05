@@ -1,0 +1,20 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>gpmall.all</groupId>
+	<!--<artifactId>gupaoedu-vip-spring</artifactId>-->
+	<artifactId>gpmall-pc-all</artifactId>
+	<version>1.1.0</version>
+	<packaging>pom</packaging>
+
+    <modules>
+		<module>gpmall-pc-1</module>
+		<module>gpmall-pc-2</module>
+        <module>gpmall-pc-3</module>
+		<module>gpmall-pc-4</module>
+		<module>gpmall-pc-5</module>
+		<module>gpmall-pc-6</module>
+		<module>gpmall-pc-7</module>
+		<module>gpmall-pc-8</module>
+    </modules>
+</project>

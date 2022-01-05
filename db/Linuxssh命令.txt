@@ -1,0 +1,279 @@
+./kafka-consumer-groups.sh --bootstrap-server localhost:19092 --describe --group customsp-group | grep kafka
+
+
+bin/kafka-consumer-groups.sh --bootstrap-server localhost:19092 --describe --group aclink-group  | grep kafka
+
+
+Kafka常用命令
+检查总共有多少个 group
+
+bin/kafka-consumer-groups.sh --bootstrap-server localhost:19092 --list
+检查对应的 group 的消费者情况
+
+bin/kafka-consumer-groups.sh --bootstrap-server localhost:19092 --describe --group ehcore-group --members --verbose
+检查消息堆积情况
+
+bin/kafka-consumer-groups.sh --bootstrap-server localhost:19092 --describe --group ehcore-group
+启动一个消费者（不会影响程序正常消费）
+
+bin/kafka-console-consumer.sh --bootstrap-server localhost:19092 --topic user-logoff --from-beginning
+zookeeper常用命令
+查看zk节点
+
+/data1/ehserver/env/zookeeper-3.4.13/bin/zkCli.sh
+ls /
+ls /taskService
+
+#删除节点
+/data1/ehserver/env/zookeeper-3.4.13/bin/zkCli.sh
+delete /localFlowListener/officeauto
+
+
+
+
+
+同步接口：
+/user/logon
+/contract/syncContracts
+/customer/syncEnterpriseCustomerIndex
+/admin/syncSequence
+/pm/syncOwnerIndex (同步个人客户)
+
+
+-- 查询表数据量
+use information_schema;
+select table_name,table_rows from tables
+where TABLE_SCHEMA = 'ehcore'
+order by table_rows desc;
+
+truncate table eh_contracts
+
+
+vim /etc/sysconfig/network-scripts/ifcfg-ens33
+
+systemctl restart network.service
+
+
+jconsole
+jstack 10136 > d:/jstack.log
+
+java -jar ehcore-5.11.2-SNAPSHOT.war --spring.config.name=ehcore_custom_1
+
+D:\redis\redis-6379>.\redis-server.exe .\redis.windows-service.conf
+D:\redis\redis-6380>.\redis-server.exe .\redis.windows-service.conf
+
+
+#本地测试环境日志：
+cd /data1/ehserver/server/core/logs
+tail -333f core-server.log
+
+/data1/ehserver/env/elasticsearch
+
+
+#进入项目目录
+cd /data1/ehserver/server/core
+
+#进入项目目录nginx，redis，elasticsearch
+cd /data1/ehserver/env
+
+#重命名文件
+sudo mv core-server.conf.bak core-server.conf
+
+#启动nginx
+cd /data1/ehserver/env/nginx/
+./sbin/nginx
+sudo ./sbin/nginx -s reload
+#停止：
+sudo ./sbin/nginx -s quit
+sudo vim core-server.conf
+
+
+查看集群状态频率最高的是下面这个。
+
+http://[主机IP]:[ES端口]
+http://10.1.120.16:9200/
+
+#集群节点健康查看
+http://10.1.10.37:9200/_cat/nodes?v
+
+#列出集群索引
+http://10.1.10.37:9200/_cat/indices?v
+
+#查看es集群状态
+http://10.1.10.37:9200/_cat/health?v
+
+查看节点的数据
+http://10.1.10.37:9200/everhomesv3/contract/20571
+http://10.1.10.37:9200/everhomesv3/_mapping/contract
+
+删除原来的结构
+curl -XDELETE http://10.1.10.37:9200/everhomesv3/_mapping/contract
+
+curl -XPUT "http://10.1.10.37:9200/everhomesv3/_mapping/contract" -d
+
+http://10.1.10.37:9200/_cat/indices?v
+
+#查看服务器状态
+./core-server status
+./core-server status
+./core-server stop
+./core-server start
+kill -9 32660
+
+#查看进程:
+ps -ef | grep  kafka
+
+#cmd命令打开远程连接：mstsc
+
+[everhomesv31x] missing
+
+./kafka-server-start.sh -daemon ../config/server.properties
+
+bin/kafka-server-start.sh config/server.properties
+bin/kafka-server-start.sh -daemon config/server.properties
+
+bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test
+
+bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test \--property parse.key=true \--property key.separator=,
+bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic test55
+
+ps -ef | grep kafka
+
+
+bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test
+
+bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test
+
+
+2.使用命令kill杀掉服务器的ES进程即可
+1.查找ES进程
+ps -ef | grep elastic
+2.杀掉ES进程
+kill -9 2382（进程号）
+3.重启ES
+sh elasticsearch -d
+
+pgrep -f elasticsearch|xargs kill -9
+/data1/ehserver/env/elasticsearch/bin/elasticsearch -d
+
+4、复制节点结构
+rsync -avz -e ssh --delete /data1/ehserver/env/elasticsearch/data/elasticsearch37/ root@10.1.120.18:/data1/ehserver/env/elasticsearch/data/elasticsearch18/
+
+
+=============================================================
+1.启动停止
+
+cd /hyb/tomcat9081/bin
+
+cd /hyb/tomcat8082/bin
+
+cd /hyb/tomcat/bin
+2.启动日志
+
+cd /hyb/tomcat9081/logs
+
+cd /hyb/tomcat8082/logs
+
+cd /hyb/tomcat/logs
+
+tail -333f catalina.out
+
+//应用日志
+cd /websphere/wasadmin/hybmgmt
+
+搞了一个美国服务器，重新弄了下nginx安装配置，重新/usr/local/nginx/sbin/nginx -s reload 提示如下报错：
+
+[root@Kvmla-201606291067 conf]# /usr/local/nginx/sbin/nginx   -s reload
+nginx: [error] invalid PID number "" in "/usr/local/nginx/logs/nginx.pid"
+无效的pid号。
+
+网上搜索资料解决办法如下：
+
+ /usr/local/nginx/sbin/nginx -c /usr/local/nginx/conf/nginx.conf
+
+/data1/ehserver/env/nginx/sbin/nginx -c data1/ehserver/env/nginx/conf/nginx.conf
+
+3.项目目录
+
+/hyb/tomcat9081/webapps
+
+/hyb/tomcat8082/webapps
+
+
+4备份
+tar cvf hybmgmt20170727.tar ./hybmgmt
+
+tar xvf hybmgmt20170727.tar ./hybmgmt
+
+tar xvf hybmgmt20170203.tar ./hybmgmt
+
+rz 上传
+sz 下载
+
+rm -f file1 删除一个叫做 'file1' 的文件'
+rmdir dir1 删除一个叫做 'dir1' 的目录'
+rm -rf dir1 删除一个叫做 'dir1' 的目录并同时删除其内容
+unzip file1.zip 解压一个zip格式压缩包
+
+5.下载日志
+
+sz 日志名称
+
+5查看进程信息
+ps -ef | grep nginx
+ps -ef | grep tomcat
+ps -ef | grep redis
+ps -ef | grep zookeeper
+
+6.重启挂载
+
+df -h
+mount 10.14.27.12:/vol/vol_hyb_02 mount /nfsc/hyb/app
+
+启动zookeeper
+sh zkServer.sh start
+Usage: ./zkServer.sh {start|start-foreground|stop|restart|status|upgrade|print-cmd}
+
+39，40上的redis也要启动
+ ./redis-server ../conf/redis.conf
+ ./redis-sentinel ../conf/sentinel.conf
+
+
+6,启动nginx
+
+./sbin/nginx
+停止：
+./sbin/nginx -s quit
+sudo ./sbin/nginx -s quit
+
+dubbo日志
+
+/hyb/mylogs/webproviderlog/webprovierServer.log
+
+/hyb/tomcat8081/webapps/app-hyb-duboo/WEB-INF/classes/com/rest/wxapi/
+
+net user /domain ex_kjkfb_dingjianmin
+
+ 查看进程:ps -ef|grep tomcat
+ 杀死进程:kill -9 进程号
+
+
+Window杀死相应端口的进程；
+1、导出PID日志：netstat -ona >d:\target.txt
+2、找到相应端口的PID
+3、TASKKILL /F /PID 14048
+
+查找文件
+find ~ -name "*.txt" -print
+
+重命名文件
+mv AutoCheckBillsDetail.jsp AutoCheckBillsDetail.jsp.bak
+
+
+sz /hyb/mylogs/schedule/scheduleServer.log
+
+SVN导出清单文件
+svn diff -r {2018-01-04}:{2018-03-27} --summarize http://10.14.157.28/svn/HYB/trunk/source/Server/app-hyb-seller-server >D:\changedfiles.txt
+
+sqlplus hyb_core/hyb0723ysx@10.14.209.126:1555/templatedb
+

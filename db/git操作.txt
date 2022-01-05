@@ -1,0 +1,281 @@
+git 常用命令小记
+
+bytedance:225. 用队列实现栈
+
+光盘 
+
+
+
+1、创建工作空间
+	cd /d/GitTest/      切换到一个空目录  
+	git clone git@10.1.1.111:dev/test.git      克隆项目到本地 
+	git config user.name "XXXX"     配置用户名
+	git config user.email XXXX      配置邮箱
+	git checkout master     （可不用，当前默认为master，后期多个分支时可使用git checkout来切换）
+	git pull --rebase      拉取内容
+	git branch -a      查看分支
+
+2、分支
+	--新建分支
+	git branch contractissue-103031
+	
+	git reset --hard head
+
+	修改之前要拉取内容，减少冲突
+	git pull --rebase
+	git pull origin master
+
+3、文件提交
+	Git提交文件：
+	git status
+	git add ./  提交所有文件
+	git commit -m "updateTable1 sql" 
+	git push 
+	git push --set-upstream origin testBranchName
+	git push origin testBranchName //推送到远端
+
+4、分支合并
+	将testBranchName分支的修改合并到master，处在master上执行
+	git merge testBranchName
+
+5、删除分支：
+	Git-命令行-删除本地和远程分支
+
+	查看项目的分支们(包括本地和远程) 
+	命令行 : $ git branch -a
+
+	删除本地分支 
+	命令行 : $ git branch -d 7.11.2.p1225-djm
+
+	删除远程分支 
+	命令行 : $ git push origin --delete 7.11.2-1214
+
+	删除本地分支 git branch -d XX 提示:  the branch  XXX is not fully merged
+	原因：XXX分支有没有合并到当前分支的内容
+	使用大写的D 强制删除  git branch -D XXX   
+
+6、删除文件
+	Git删除文件：本地和分支上都删除
+	git rm  路径/文件名
+
+7、拉取分支
+	基于某一个分支拉取一个分支
+	git checkout -b asset6.3（新建分支的名字） origin/master（远端仓库）
+	
+	git checkout -b  8.8.4.p1229 origin/8.8.4.p1101
+	
+	git reset --soft 2f0992eec1d4b0b874efee5f984a5b337b274852
+	
+	bytedance:0103:二叉树的锯齿形层次遍历
+
+	
+8、Git-命令行-忽略文件 .gitignore 
+
+	在.gitignore 文件添加想要忽略的文件，类似：
+	*.xml.bak
+	*rebel.xml
+	rebel-*.xml
+	*.classpath
+	*.settings
+	*.project
+	*.iml
+	*.vscode/
+7.5.0-schema.sql
+
+WarehouseServiceImpl
+WarehouseServiceImpl
+
+9、“Your local changes to the following files would be overwritten by checkout” （切换分支）解决：
+	当前分支有未跟踪的文件，checkout 命令会覆盖它们，请缓存( stash )或者提交( commit )。
+
+	1.未跟踪文件的内容改动很重要，保存修改
+
+		//第一种方式 存到暂存区
+		git add .
+		git stash 
+		//取出的时候使用 能耗代码
+		git stash pop
+
+		//第二种方式 发起一个commit 存到提交历史
+		git add.
+		git commit -m "commit message"
+
+	2.未跟踪文件的内容改动不重要，放弃修改
+
+		git log 查看日志
+		未使用 git add 缓存代码时。
+
+		可以使用 git checkout -- filepathname 
+		(比如： git checkout -- readme.md  ，不要忘记中间的 “--” ，不写就成了检出分支了！！)。放弃所以的文件修改可以使用 git checkout .
+
+		已经使用了  git add 缓存了代码。
+		可以使用  git reset HEAD filepathname 
+		（比如： git reset HEAD readme.md）来放弃指定文件的缓存，放弃所有的缓存可以使用 git reset HEAD
+
+		已经用 git commit  提交了代码。
+		git reset --hard HEAD^ 来回退到上一次commit的状态。
+		此命令可以用来回退到任意版本：git reset --hard  commitid
+
+10、检出远端的文件，覆盖本地的文件,拉取某个分支的一个类
+
+	git checkout origin/dev44   engine/src/main/java/com/everhomes/realty/energy/thirdParty/SuntrontAutoReadingHandler.java
+	
+	
+	git checkout origin/main  
+	
+	
+	git merge --abort    // 中止合并  
+
+11、“dst refspec branch matches more than one”
+
+	当远程仓库同时存在相同名称的 branch 和 tag 时，不指明绝对路径的前提下，操作这个名称的 branch 和 tag 都会出现这个问题。
+	解决方法很简单，指明操作对象的绝对路径就能准确操作了。
+
+	//删除 dev_test 分支
+	git push origin :refs/heads/dev_test
+
+	//删除 dev_test 标签
+	git push origin :refs/tags/dev_test
+
+12、使用 git add . “warning: CRLF will be replaced by LF in XXX . The file will have its original line endings in your working directory.” .
+	就是文件中存在两种环境的换行符，git 会自动替换 CRLF 为 LF ，所以提示警告。
+
+	解决方法，非常简单，就一个命令行就可以解决的问题。
+	git config core.autocrlf false  //将设置中自动转换功能关闭
+
+13、git stash 分支切换的时候 非常好用的命令
+	在一个分支上开发，需要切换到另一个分支修改bug，使用git stash 暂存当前修改，切换到bug分支，完成后git stash pop 取出
+	原分支的修改，继续修改，不会产生无意义的提交历史，也不会导致代码丢失。
+
+	git stash  show  //查看刚才暂存的修改
+
+	git stash pop //取出刚才暂存的修改
+
+	存储多个 stash 的情况
+	当使用git stash 创建 stash 的时候，会给 stash 一个默认的名称。
+
+	git stash list //查看暂存区的所有暂存修改记录
+
+	上面的演示中，取出 stash 的方式都是
+
+	git stash pop  //取出最近一次暂存并删除记录列表中对应记录。
+
+	因为 git stash pop 是弹出栈顶的一个 stash ，也就是最后一次存储的 stash。在存储多个stash ，想取出非栈顶的一个的情况下，是不适用的。
+
+	这个时候要使用：
+	git stash list //查看暂存区的所有暂存修改
+	git stash apply stash@{X} //取出相应的暂存
+	git stash drop stash@{X} //将记录列表中取出的对应暂存记录删除
+
+14、分支合并使用到的命令是：
+
+	git merge <branch name>
+
+
+15、代码回滚：
+	确定回滚到哪个提交，找到该提交的 commit id,执行以下命令，就好了
+
+	git reset --hard commit id
+
+	远程分支回滚
+	依旧是个伪命题。远程分支不存在什么回滚，要想达到回滚的效果，就是删除之前的远程分支，然后把本地回滚好的本地分支，push 到远程。
+
+	git reset --hard commit id //本地分支回滚
+	git push origin :<name> //删除远程分支
+	git push origin <name> //用回滚后的本地分支重新建立远程分支
+
+
+	git代码库回滚: 指的是将代码库某分支退回到以前的某个commit id
+	1、本地代码回滚到上一版本（或者指定版本）
+	git reset --hard d69abb843b4c85eba485382beaa7beab50363bbf
+	git reset --hard HEAD~1
+	git merge issue-38220
+	2、加入-f参数，强制提交，远程端将强制跟新到reset版本
+	git push -f origin issue-38220 
+
+3f80cd632f9342049d53f817f16053911d5efe5b
+	
+	
+16、Swap file .MERGE_MSG.swp already exists：
+
+	问题解决：
+
+	第一步：回到合并前状态
+
+	 git merge --abort  // 中止合并
+	 rm .git/.MERGE_MSG.sw* //删除 vim 非正常关闭产生的文件
+
+	第二步：重新合并 
+	合并提交信息页面，使用 :wq! 或者 :q! 正常退出 VIM ，就能正常合并啦。
+
+
+17、GitHub Flow 模型简单说明
+	只有一个长期分支 master ,而且 master 分支上的代码，永远是可发布状态,一般 master 会设置 protected 分支保护，只有有权限的人才能推送代码到 master 分支。
+	如果有新功能开发，可以从 master 分支上检出新分支。
+	在本地分支提交代码，并且保证按时向远程仓库推送。
+	当你需要反馈或者帮助，或者你想合并分支时，可以发起一个 pull request。
+	当 review 或者讨论通过后，代码会合并到目标分支。
+	一旦合并到 master 分支，应该立即发布。
+
+
+18、cherry-pick 的翻译是择优挑选，使用git cherry-pick命令，可以选择将现有的一个或者多个提交的修改引入当前内容。
+
+	假设你现在正在开发一个项目，有一个功能分支 feature，开发分支 develop。 feature 有3个提交，分别是 A ，B ，C 。
+	develop 分支只想加入 C 功能， 此时合并操作无法满足，因为直接合并 feature，会将3个提交都合并上，我想合并就只有 C，不要 A，B。此时就需要–cherry pick！
+
+	具体的做法：
+
+	切换到 develop 分支。
+	通过 git log feature,找到 C 的 SHA1 值。
+	通过 git cherry-pick <C的SHA1> ，将 C 的修改内容合并到当前内容分支 develop 中。
+	若无冲突，过程就已经完成了。如果有冲突，按正常冲突解决流程即可。
+
+	cherry-pick 操作的对象就是 commit。 
+	merge 操作的对象就是 commit history。
+
+
+19、rebase 命令
+
+	rebase 和 merge 本质上做的是一个事情，都是分支历史的合并。
+
+	rebase 操作的思想上分为两个步骤： 
+	1. 确定变基对象：就是你改变的是哪个分支的提交，然后 checkout 到此分支。 
+	2. 选好 base ：选好作为基点的提交，形象地来说，就是你要变到那条线上。 
+	3. 开始 re ：rebase 基提交。
+
+	rebase 为每一个变基后的提交都创建了一个内容相同新的提交。 
+	develop 的两个变基提交 创建 develop1.txt 文件和创建 develop2.txt 文件的 SHA1 值都发生的变化，都是新创建的提交。
+	变基前的提交已经被丢弃，已经被回收或者正在等待回收。
+
+	变基后的提交会依次排到 master 分支的后面。 
+	注意到创建 master1.txt 文件 这个提交的时间是比 develop 分支的两个提交要晚的，如果是 merge 操作的话，分支的历史，会根据时间把 创建 master1.txt 文件 放在 develop 两个提交的后面。
+	但 rebase 操作会所有变基的对象会直接整个排到基础提交的末端，不会让分支历史混乱。（关于 merge 的提交合并，你平时可以观察一下，是不是）
+
+
+
+20、Pull is not possible because you have unmerged files解决：解决冲突
+	1.pull会使用git merge导致冲突，需要将冲突的文件resolve掉 git add -u, git commit之后才能成功pull.
+	2.如果想放弃本地的文件修改，可以使用git reset --hard FETCH_HEAD，FETCH_HEAD表示上一次成功git pull之后形成的commit点。然后git pull.
+	注意：
+	git merge会形成MERGE-HEAD(FETCH-HEAD) 。git push会形成HEAD这样的引用。HEAD代表本地最近成功push后形成的引用。
+
+
+21、you need to resolve your current index first 解决办法
+
+ 从一个分支A切换到另一个分支B后，对切换后的B分支进行pull操作，因为pull操作实际上包含了fetch+merge操作，在执行 merge操作时，由于很长时间没有对B分支执行过pull/merge操作，本地的B分支库与remote中的B分支库中的差异很大（且这些差异是其他 同事开发的文件），merge时产生冲突，使得B分支的状态为merging，其实是指merge失败，还停留在merge状态，也不能执行pull操 作。这时没有解决冲突，而是从B分支上执行checkout/switchto操作，试图再切换其他分支时，报：
+[plain] view plaincopy在CODE上查看代码片派生到我的代码片
+
+    …….java : needs merge  
+    …….java : needs merge  
+    …….java : needs merge  
+    error : you need to resolve your current index first  
+
+的错，google了半天，终于在stackoverflow上找到了答案，大题意思是：merge失败，有conflicts没解决，可以：
+
+1、解决conflicts后再次执行merge；
+
+2、回退到merge前
+
+恩，既然merge冲突是其他同事的文件，我不需要去resolve conflicts，那就退回merge前吧，单纯的改我的文件再push吧，执行以下代码：
+
+    git reset --merge  

@@ -1,0 +1,116 @@
+配置用户名，邮箱
+git config user.name "dingjianmin"
+git config user.email jm.ding@zuolin.com
+
+https://10.50.12.39/cm/WebService/OfficeApp-CM/OfficeApp_CMService.asmx?wsdl
+
+生成pom文件，在ehnextgen下执行 每次建一个分支都要执行
+-SNAPSHOT
+
+./tools/config-pom.sh -v 8.11.3-djm-SNAPSHOT
+
+./tools/config-pom.sh -v 8.11.0.p1216
+
+技术面-交叉面-技术面，面完hr面
+
+
+tail -fn 1000 server.log | grep 'crm.enterprise.entryInfo.create'
+
+tail -fn 1000 server.log | grep 'crm.customer.entry.community'
+
+tail -fn 1000 server.log | grep 'crm.enterprise.entryInfo.delete'
+
+
+energymeter
+
+curl -XPUT http://127.0.0.1:9201/energymeter/_settings -d '{ "index" : { "max_result_window" : 10000000}}'
+
+13809890421 小云 525324
+13667351153 段  1028217
+18665331243 宋 505214
+
+cat -n core-server.log |grep "sendMessage2OnlineUsers sendMessage, receiveUserId"
+
+-DCLUSTER_NAME=yuanqudev1-djm
+--debug --apollo.meta=http://configcenter-dev.zuolin.com --apollo.cluster=yuanqudev1-djm --apollo.bootstrap.enabled=true
+--spring.application.name=realty-djm
+
+application-9090.properties
+
+server.port=9090
+
+mvn dependency:tree
+
+vendordocking
+
+505214
+
+啊啊13628685907
+
+
+git cherry-pick 8123590faa4bb307da7bd0dd1c67b9d41a3396fe 
+
+623681
+
+请求头；
+Cookie: JSESSIONID=1A769D398752A2C62C08D3E02CB8E674; namespace_id=11; user_id=505214; token=H6Rccbb7i4uuaXfQuppb4cqlSSEbE1vZQ7G1bpr842nDWsPLWpW_9vErjQwyLfaTaX30BnQW4nqzF9nlXGe4M3YeyMJzwYioqmEdc0tPYCWthr9S3Wu17Jctyq5j2qBj
+user
+/getJWTtoken
+
+C:\Users\dingjianmin\.m2\repository\com\everhomes
+D:\maven\.m2\repository\com\everhomes
+
+账号: vpnserverc
+密码： vpnserverc@2018
+
+
+
+com.everhomes.officeauto.App
+-Xms512m -Xmx1024m -DCLUSTER_NAME=wuyetest2
+--apollo.meta=http://configcenter-dev.zuolin.com --apollo.cluster=wuyetest2
+$MODULE_WORKING_DIR$
+EVH_HOME=E:\DevGit1\officeauto;EVH_IOS_HOME=E:\DevGit1\officeauto
+
+
+
+##查看所有表信息
+SELECT * FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'ehcore_preupdate_0919'
+##查看各个表数据量
+truncate table eh_zj_syncdata_backup;
+drop table eh_flow_cases;
+
+SELECT table_name,table_rows FROM information_schema.tables
+WHERE TABLE_SCHEMA = 'ehcore_preupdate_0919' ORDER BY table_rows DESC;
+
+
+-- 复制表
+CREATE TABLE eh_flow_cases LIKE ehcore_preupdate_mqx.eh_flow_cases;
+INSERT eh_flow_cases SELECT * FROM ehcore_preupdate_mqx.eh_flow_cases;
+
+
+git：jm.ding@zuolin.com 123
+
+现网：
+阴瑜楠
+id: 506488
+namespaceId: 999945
+userIdentifier: 18728470812
+password: a1e653e9956f517402cf7e926d33d602a8fc356f27ff9289b68d59ebc3a16bf0
+regionCode: 86
+
+18728470812
+
+蒲江蓉
+13823295656/123456
+
+
+下载模板
+http://yuanqudev1.zuolin.com/evh/patrol/exportPatrolTemplates?namespaceId=11&ownerType=EhOrganization&ownerId=1045660&targetId=240111044332061475&targetType=community&organizationId=1045660&appId=974246&exportPatrolTemplateType=1
+
+链接：https://pan.baidu.com/s/1DrIyCNQQlaeAgpRQu7TVgg 密码：ckxj
+这是往期BAT面试技巧视频：
+链接: https://pan.baidu.com/s/1QVLYtBpiDyGuWXLM9P-TOw 密码: ax2a
+
+
+
+
