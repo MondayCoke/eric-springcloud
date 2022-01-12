@@ -1,0 +1,72 @@
+
+spring:
+  application:
+    name: gpmall-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: baidu-route
+          uri: https://www.baidu.com
+          predicates:
+            - Path=/api/**
+            - Auth=Authorization
+          filters:
+            - StripPrefix=1
+        - id: limit-route
+          uri: https://www.baidu.com
+          predicates:
+            - Path=/limit/**
+          filters:
+            - StripPrefix=1
+            - name: RequestRateLimiter
+              args:
+                key-resolver: "#{@ipAddressKeyResolver}"
+                redis-rate-limiter.replenishRate: 1
+                redis-rate-limiter.burstCapacity: 2
+                redis-rate-limiter.requestedTokens: 1
+            - Demo=GP-Mic
+        - id: loadbalance-route
+          uri: lb://gpmall-portal
+          predicates:
+            - Path=/order/**
+          filters:
+            - name: RequestRateLimiter
+              args:
+                key-resolver: "#{@ipAddressKeyResolver}"
+                redis-rate-limiter.replenishRate: 1
+                redis-rate-limiter.burstCapacity: 2
+                redis-rate-limiter.requestedTokens: 1
+        - id: gpmall-route
+          uri: lb://gpmall-portal
+          predicates:
+            - Path=/api/**
+          filters:
+            - StripPrefix=1
+      discovery:
+        locator:
+          lower-case-service-id: true
+          enabled: true
+  redis:
+    port: 6379
+    host: 192.168.8.132
+
+server:
+  port: 80
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: gateway
+  endpoint:
+    gateway:
+      enabled: true
+
+
+ignored:
+  urls:
+    - /user/auth
