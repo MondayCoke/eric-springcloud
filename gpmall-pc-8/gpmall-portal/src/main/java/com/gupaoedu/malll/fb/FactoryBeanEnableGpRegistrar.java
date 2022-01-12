@@ -14,6 +14,6 @@ import java.lang.annotation.*;
 @Target(ElementType.TYPE)
 @Documented
 //ImportSelector  Spring Boot自动装配有这个机制
-@Import(GpFactoryBeanImortBeanDefinitionRegistrar.class)
+@Import(GpFactoryBeanImportBeanDefinitionRegistrar.class)
 public @interface FactoryBeanEnableGpRegistrar {
 }
